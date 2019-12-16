@@ -1,0 +1,6 @@
+export const SET_FORKS = 'SET_FORKS';
+export const START_LOADING = 'START_LOADING';
+export const STOP_LOADING = 'STOP_LOADING';
+export const SET_PAGE_NUMBER = 'SET_PAGE_NUMBER';
+export const ADD_FAVOR_FORK = 'ADD_FAVOR_FORK'
+export const REMOVE_FAVOR_FORK = 'REMOVE_FAVOR_FORK';
