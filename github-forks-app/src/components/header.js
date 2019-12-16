@@ -4,15 +4,15 @@ const styles = {
     
 }
 
-const Header = props => {
+const Header = ({onBtnClick, onInputChange, inputValue}) => {
+    
     return (
         <nav>
             <form>
-                <input type="text" onChange={()=>{}} />
-                <button onClick={e=> {
+                <input type="text" value={inputValue} onChange={onInputChange} />
+                <button onClick={(e)=>{
                     e.preventDefault();
-                    props.onClick();
-                    props.changePage();
+                    onBtnClick();
                 }}>search</button>
             </form>
         </nav>

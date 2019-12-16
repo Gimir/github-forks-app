@@ -5,19 +5,12 @@ import { startLoading, stopLoading } from './onLoad';
 const ENDPOINT = 'https://api.github.com';
 //user/repos?page=2&per_page=100
 
-// ({
-//     type: SET_FORKS,
-//     payload: forks
-// })
 
-export const setForks = forks => {
-    return dispatch => {
-        dispatch({
-            type: SET_FORKS,
-            payload: forks
-        });
-    };
-};
+export const setForks = forks => ({
+    type: SET_FORKS,
+    payload: forks
+});
+
 
 export const fetchForks = (owner, repository, page) => {
     return dispatch => {
