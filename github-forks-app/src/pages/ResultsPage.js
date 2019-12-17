@@ -21,9 +21,9 @@ const ResultsPage = ({
         fetchForks(owner, repName, number);
     }, [requestData])
 
-    const changePage = (number) => {
-        history.push(`/search/${owner}/${repName}/${Number(number) + number}`);
-        setRequestData( owner, repName, number + number );
+    const changePage = (n) => {
+        history.push(`/search/${owner}/${repName}/${Number(number) + n}`);
+        setRequestData( owner, repName, number + n );
         
     };
 

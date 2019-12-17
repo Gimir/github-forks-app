@@ -11,11 +11,11 @@ const HeaderContainer = ({setDataForFetching, history}) => {
 
     const onBtnClick = () => {
         const [owner, repo] = inputValue.split('/');
-        setDataForFetching(owner, repo);
+        setDataForFetching(owner, repo, 1);
         history.push(`/search/${owner}/${repo}/1`);
     };
     const onInputChange = e => {
-        const value = e.target.value;
+        const { value } = e.target;
         setInputValue(value);
     }
     return (
@@ -24,7 +24,7 @@ const HeaderContainer = ({setDataForFetching, history}) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    setDataForFetching: (owner, repo, page=1) => dispatch(setRequestData(owner, repo, page))
+    setDataForFetching: (owner, repo, page) => dispatch(setRequestData(owner, repo, page))
 });
 
 export default withRouter(connect(
