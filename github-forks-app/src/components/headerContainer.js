@@ -3,28 +3,28 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { setRequestData } from '../actionCreators/requestData';
 
-import Header from './header';
+import SearchField from './SearchField';
 
 
 const HeaderContainer = ({setDataForFetching, history}) => {
     const [inputValue, setInputValue] = useState('');
 
-    const onBtnClick = (inputValue) => {
-        const params = inputValue.split('/');
-        setDataForFetching(params[0], params[1], 1);
-        history.push(`/search/${params[0]}/${params[1]}/1`);
+    const onBtnClick = () => {
+        const [owner, repo] = inputValue.split('/');
+        setDataForFetching(owner, repo, 1);
+        history.push(`/search/${owner}/${repo}/1`);
     };
     const onInputChange = e => {
-        const value = e.target.value;
+        const { value } = e.target;
         setInputValue(value);
     }
     return (
-        <Header onBtnClick={onBtnClick.bind(this, inputValue)} onInputChange={onInputChange} inputValue={inputValue} />
+        <SearchField onBtnClick={onBtnClick} onInputChange={onInputChange} inputValue={inputValue} />
     );
 };
 
 const mapDispatchToProps = dispatch => ({
-    setDataForFetching: (owner, repository, page) => dispatch(setRequestData(owner, repository, page))
+    setDataForFetching: (owner, repo, page) => dispatch(setRequestData(owner, repo, page))
 });
 
 export default withRouter(connect(

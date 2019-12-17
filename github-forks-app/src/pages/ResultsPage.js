@@ -4,11 +4,10 @@ import { fetchForks } from '../actionCreators/forks';
 import { setRequestData } from '../actionCreators/requestData';
 import { withRouter } from 'react-router-dom';
 
-import Pagination from '../components/pagination';
+import Pagination from '../components/Pagination';
 
 const ResultsPage = ({
     forks,
-    favorites,
     onLoad,
     fetchForks,
     setRequestData,
@@ -16,25 +15,19 @@ const ResultsPage = ({
     match,
     requestData
 }) => {
+    const { owner, repName, number } = match.params;
+
     useEffect(()=> {
-        fetchForks(
-            match.params.owner,
-            match.params.repName,
-            match.params.number
-        );
+        fetchForks(owner, repName, number);
     }, [requestData])
 
-    const changePage = (number) => {
-        history.push(`/search/${match.params.owner}/${match.params.repName}/${Number(match.params.number) + number}`);
-        setRequestData( 
-            match.params.owner,
-            match.params.repName,
-            match.params.number + number
-        );
+    const changePage = (n) => {
+        history.push(`/search/${owner}/${repName}/${Number(number) + n}`);
+        setRequestData( owner, repName, number + n );
         
     };
 
-    if(onLoad) return <h1>Loading...</h1>
+    if (onLoad) return <h1>Loading...</h1>
 
     return (
         <div>
@@ -46,18 +39,18 @@ const ResultsPage = ({
             <Pagination 
                 onNextClick={changePage.bind(this, 1)}
                 onPrevClick={changePage.bind(this, -1)}
-                prevDisabled={Number(match.params.number) === 1}
+                prevDisabled={Number(number) === 1}
                 nextDisabled={forks.length < 10}
             />
         </div>
     );
 };
 
-const mapStateToProps = state => ({
-    requestData: state.requestData,
-    forks: state.forks,
-    favorites: state.favoritForks,
-    onLoad: state.onLoad
+const mapStateToProps = ({requestData, forks, favoriteForks, onLoad}) => ({
+    requestData: requestData,
+    forks: forks,
+    favorites: favoriteForks,
+    onLoad: onLoad
 });
 
 const mapDispatchToProps = dispatch => ({

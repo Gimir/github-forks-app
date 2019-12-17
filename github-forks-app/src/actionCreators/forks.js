@@ -22,15 +22,26 @@ export const fetchForks = (owner, repository, page) => {
                 dispatch(stopLoading());
                 
                 const forks = res.data.map(fork => {
+                    const { 
+                        id,
+                        full_name, 
+                        stargazers_count,
+                        clone_url,
+                        owner: {
+                            login,
+                            avatar_url
+                        }, 
+                    } = fork;
+
                     return {
-                        id: fork.id,
-                        repositoryName: fork.full_name,
+                        id,
                         author: {
-                            login: fork.owner.login,
-                            avatar_url: fork.owner.avatar_url
+                            login,
+                            avatar_url,
                         },
-                        stars: fork.stargazers_count,
-                        url: fork.clone_url
+                        repositoryName: full_name,
+                        stars: stargazers_count,
+                        url: clone_url,
                     };
                 });
 
