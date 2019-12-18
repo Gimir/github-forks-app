@@ -5,10 +5,14 @@ import { setRequestData } from '../actionCreators/requestData';
 import { withRouter } from 'react-router-dom';
 
 import Pagination from '../components/Pagination';
+import NotFoundPage from './NotFoundPage';
+import Wrapper from '../components/Wrapper';
+import ForksList from '../components/ForksList';
+import Spinner from '../components/Spinner';
 
 const ResultsPage = ({
     forks,
-    onLoad,
+    fetchStatus,
     fetchForks,
     setRequestData,
     history,
@@ -27,15 +31,13 @@ const ResultsPage = ({
         
     };
 
-    if (onLoad) return <h1>Loading...</h1>
+    if (fetchStatus.error) return <NotFoundPage value={`${owner}/${repName}`} />
 
     return (
         <div>
-            {
-                forks.map(fork => {
-                    return <h3 key={fork.id}>{fork.author.login}</h3>
-                })
-            }
+            <Wrapper>
+                {fetchStatus.loading ? <Spinner /> : <ForksList forks={forks} />}
+            </Wrapper>
             <Pagination 
                 onNextClick={changePage.bind(this, 1)}
                 onPrevClick={changePage.bind(this, -1)}
@@ -46,11 +48,11 @@ const ResultsPage = ({
     );
 };
 
-const mapStateToProps = ({requestData, forks, favoriteForks, onLoad}) => ({
+const mapStateToProps = ({requestData, forks, favoriteForks, fetchStatus}) => ({
     requestData: requestData,
     forks: forks,
     favorites: favoriteForks,
-    onLoad: onLoad
+    fetchStatus: fetchStatus
 });
 
 const mapDispatchToProps = dispatch => ({

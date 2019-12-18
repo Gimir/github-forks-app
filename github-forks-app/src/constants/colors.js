@@ -1,5 +1,7 @@
 export default {
-    bg_dark: 'bg-dark',
-    bg_light: 'bg-light'
-
+    main: '#3f51b5',
+    second: '#2196f3',
+    text: '#212121',
+    links: '#673ab7',
+    error: '#d50000'
 }

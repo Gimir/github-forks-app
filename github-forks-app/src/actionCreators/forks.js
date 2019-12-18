@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { SET_FORKS } from '../constants/actions';
-import { startLoading, stopLoading } from './onLoad';
+import { startLoading, stopLoadingSuccess, stopLoadingError } from './fetchStatus';
 
 const ENDPOINT = 'https://api.github.com';
 //user/repos?page=2&per_page=100
@@ -19,7 +19,7 @@ export const fetchForks = (owner, repository, page) => {
         axios
             .get(`${ENDPOINT}/repos/${owner}/${repository}/forks?page=${page}&per_page=10`)
             .then(res => {
-                dispatch(stopLoading());
+                dispatch(stopLoadingSuccess());
                 
                 const forks = res.data.map(fork => {
                     const { 
@@ -48,9 +48,8 @@ export const fetchForks = (owner, repository, page) => {
                 dispatch(setForks(forks));
             })
             .catch(err => {
-                dispatch(stopLoading());
-                alert('Request has not completed!');
-                console.log(err.message);
+                dispatch(stopLoadingError(err.message));
+                dispatch(setForks([]));
             });
     };
 };
