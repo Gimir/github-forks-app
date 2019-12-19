@@ -21,7 +21,7 @@ const HeaderContainer = ({setDataForFetching, history}) => {
         }
         else {
             setInvalidInput(true);
-            alert('The search query must be "owner/repository"');
+            alert('The search query must be "owner/repository" like');
         }
         
     };
