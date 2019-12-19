@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-//import { ConnectedRouter } from 'connected-react-router';
-import store, { history } from './store';
+import store from './store';
 import * as serviceWorker from './serviceWorker';
 
 const target = document.querySelector('#root');
