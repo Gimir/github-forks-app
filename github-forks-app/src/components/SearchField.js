@@ -28,12 +28,14 @@ const StyledForm = styled.form`
         padding: 10px;
         font-size: 18px;
         border-radius: 10px 0 0 10px;
+        outline: none;
     }
 
     button {
         width: 20%;
         height: 100%;
         border: none;
+        outline: none;
         font-size: 20px;
         color: #fff;
         background-color: ${colors.second};

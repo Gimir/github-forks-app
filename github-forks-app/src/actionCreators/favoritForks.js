@@ -5,7 +5,7 @@ export const addFavorFork = fork => ({
     payload: fork
 });
 
-export const removeFavorFork = id => ({
+export const removeFavorFork = fork => ({
     type: REMOVE_FAVOR_FORK,
-    payload: id
+    payload: fork
 });

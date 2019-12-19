@@ -46,7 +46,7 @@ const StyledSpace = styled.div`
     height: 100px;
 `;
 
-const ForksList = ({forks}) => (
+const ForksList = ({forks, favorites}) => (
     <StyledDiv>
         <StyledHeader>
             <StyledColumn style={{width: '30%'}}>Author</StyledColumn>
@@ -66,6 +66,7 @@ const ForksList = ({forks}) => (
                         stars={fork.stars} 
                         link={fork.url} 
                         key={fork.id}
+                        favorite={favorites.includes(fork.repositoryName)}
                     />
                 ))
             }

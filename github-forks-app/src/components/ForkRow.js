@@ -24,9 +24,10 @@ const ForkRow = ({
     author,
     repName,
     stars,
-    link
+    link,
+    favorite
 }) => (
-    <StyledDiv>
+    <StyledDiv style={{backgroundColor: favorite ? colors.second : ''}}>
         <StyledColumn style={{width: '30%'}}>{author}</StyledColumn>
         <StyledColumn style={{width: '40%'}}>{repName}</StyledColumn>
         <StyledColumn style={{width: '15%'}}>{stars}</StyledColumn>
